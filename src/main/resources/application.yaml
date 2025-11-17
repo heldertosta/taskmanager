@@ -1,1 +1,20 @@
-spring.application.name=taskmanager
+spring:
+  application:
+    name: taskmanager
+  datasource:
+    url: jdbc:h2:mem:taskmanagerdb
+    driver-class-name: org.h2.Driver
+    username: admin
+    password: admin
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate.ddl-auto: update
+    show-sql: true
+    properties.hibernate.format_sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+server:
+  port: 8090
