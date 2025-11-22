@@ -17,10 +17,10 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/tarefas")
-@Tag(name = "Tasks", description = "Endpoints for managing tasks")
+@Tag(name = "Tarefas", description = "Endpoints para gerenciamento de tarefas")
 public class TaskController {
 
-    private static final String TASK_NOT_FOUND_MESSAGE = "Task not found.";
+    private static final String TASK_NOT_FOUND_MESSAGE = "Tarefa não encontrada.";
 
     final TaskService taskService;
 
@@ -28,16 +28,16 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @Operation(summary = "List all tasks", description = "Retrieve a list of all registered tasks")
+    @Operation(summary = "Listar todas as tarefas", description = "Lista todas as tarefas cadastradas no sistema")
     @GetMapping
     public ResponseEntity<List<TaskModel>> getTasks() {
         return ResponseEntity.status(HttpStatus.OK).body(taskService.findAll());
     }
 
-    @Operation(summary = "Get task by ID", description = "Retrieve a specific task by its unique identifier")
+    @Operation(summary = "Buscar tarefa pelo ID", description = "Retorna uma tarefa específica pelo seu identificador")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Task found"),
-            @ApiResponse(responseCode = "404", description = "Task not found")
+            @ApiResponse(responseCode = "200", description = "Tarefa encontrada com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Tarefa não encontrada")
     })
     @GetMapping("/{taskId}")
     public ResponseEntity<Object> getTaskById(@PathVariable(value = "taskId") UUID taskId) {
@@ -48,21 +48,21 @@ public class TaskController {
         return ResponseEntity.status(HttpStatus.OK).body(taskModelOptional.get());
     }
 
-    @Operation(summary = "Create a new task", description = "Create a new task with title and description")
+    @Operation(summary = "Criar uma nova tarefa", description = "Criar uma nova tarefa no sistema com título e descrição")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Task created successfully"),
-            @ApiResponse(responseCode = "400", description = "Invalid input data")
+            @ApiResponse(responseCode = "201", description = "Tarefa criada com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Dados de entrada inválidos")
     })
     @PostMapping
     public ResponseEntity<Object> createTask(@RequestBody @Valid TaskModel taskModel) {
         return ResponseEntity.status(HttpStatus.CREATED).body(taskService.save(taskModel));
     }
 
-    @Operation(summary = "Update a task", description = "Update an existing task by its ID")
+    @Operation(summary = "Atualizar tarefa", description = "Atualizar uma tarefa existente pelo seu ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Task updated successfully"),
-            @ApiResponse(responseCode = "404", description = "Task not found"),
-            @ApiResponse(responseCode = "400", description = "Invalid input data")
+            @ApiResponse(responseCode = "200", description = "Tarefa atualizada com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Tarefa não encontrada"),
+            @ApiResponse(responseCode = "400", description = "Dados de entrada inválidos")
     })
     @PutMapping("/{taskId}")
     public ResponseEntity<Object> updateTask(@PathVariable(value = "taskId") UUID taskId,
@@ -77,10 +77,10 @@ public class TaskController {
         return ResponseEntity.status(HttpStatus.OK).body(taskService.update(taskModel1));
     }
 
-    @Operation(summary = "Delete a task", description = "Delete a task by its ID")
+    @Operation(summary = "Excluir uma tarefa", description = "Excluir uma tarefa pelo ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Task deleted successfully"),
-            @ApiResponse(responseCode = "404", description = "Task not found")
+            @ApiResponse(responseCode = "200", description = "Tarefa excluída com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Tarefa não encontrada")
     })
     @DeleteMapping("/{taskId}")
     public ResponseEntity<Object> deleteTask(@PathVariable(value = "taskId") UUID taskId) {
@@ -89,6 +89,6 @@ public class TaskController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(TASK_NOT_FOUND_MESSAGE);
         }
         taskService.delete(taskModelOptional.get());
-        return ResponseEntity.status(HttpStatus.OK).body("Task deleted successfully.");
+        return ResponseEntity.status(HttpStatus.OK).body("Tarefa excluída com sucesso.");
     }
 }
