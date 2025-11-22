@@ -17,7 +17,7 @@ public class OpenApiConfig {
                         .description(
                                 """
                                    IPOG <br/>
-                                   Curso: Análise e Desenvolvimento de Sistema - 3º Período <br/> 
+                                   Curso: Análise e Desenvolvimento de Sistema - 3º Período <br/>
                                    Disciplina: Serviços Web e API Rest <br/>
                                    Atividades Processuais 2, 3 e 4. <br/>
                                    Aluno: Helder Alves Tosta
