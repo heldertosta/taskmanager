@@ -23,86 +23,73 @@ Este projeto é uma API RESTful para gerenciamento de tarefas pessoais, desenvol
 
 ## Endpoints da API
 
-### 1. Listar todas as tarefas
--   **Método:** `GET`
--   **URL:** `/tasks`
--   **Resposta de Sucesso (200 OK):**
-    ```json
-    [
-      {
-        "id": "uuid",
-        "title": "Título da Tarefa",
-        "description": "Descrição da Tarefa"
-      }
-    ]
-    ```
+### API Documentation
 
-### 2. Buscar tarefa por ID
--   **Método:** `GET`
--   **URL:** `/tasks/{id}`
--   **Resposta de Sucesso (200 OK):**
-    ```json
+The API documentation is available via Swagger UI:
+- **URL:** `http://localhost:8080/swagger-ui/index.html`
+
+## API Endpoints (v1)
+
+Base URL: `/api/v1/tarefas`
+
+### 1. List All Tasks
+- **URL:** `/api/v1/tarefas`
+- **Method:** `GET`
+- **Response:** `200 OK`
+  ```json
+  [
     {
       "id": "uuid",
-      "title": "Título da Tarefa",
-      "description": "Descrição da Tarefa"
+      "title": "Task Title",
+      "description": "Task Description"
     }
-    ```
--   **Resposta de Erro (404 Not Found):**
-    ```
-    Task not found.
-    ```
+  ]
+  ```
 
-### 3. Criar nova tarefa
--   **Método:** `POST`
--   **URL:** `/tasks`
--   **Corpo da Requisição (JSON):**
-    ```json
-    {
-      "title": "Título da Tarefa",
-      "description": "Descrição da Tarefa"
-    }
-    ```
--   **Resposta de Sucesso (201 Created):**
-    ```json
-    {
-      "id": "uuid",
-      "title": "Título da Tarefa",
-      "description": "Descrição da Tarefa"
-    }
-    ```
+### 2. Get Task by ID
+- **URL:** `/api/v1/tarefas/{id}`
+- **Method:** `GET`
+- **Response:** `200 OK` or `404 Not Found`
 
-### 4. Atualizar tarefa existente
--   **Método:** `PUT`
--   **URL:** `/tasks/{id}`
--   **Corpo da Requisição (JSON):**
-    ```json
-    {
-      "title": "Novo Título",
-      "description": "Nova Descrição"
-    }
-    ```
--   **Resposta de Sucesso (200 OK):**
-    ```json
-    {
-      "id": "uuid",
-      "title": "Novo Título",
-      "description": "Nova Descrição"
-    }
-    ```
--   **Resposta de Erro (404 Not Found):**
-    ```
-    Task not found.
-    ```
+### 3. Create Task
+- **URL:** `/api/v1/tarefas`
+- **Method:** `POST`
+- **Body:**
+  ```json
+  {
+    "title": "Task Title",
+    "description": "Task Description"
+  }
+  ```
+- **Response:** `201 Created` or `400 Bad Request` (Validation Error)
 
-### 5. Excluir tarefa
--   **Método:** `DELETE`
--   **URL:** `/tasks/{id}`
--   **Resposta de Sucesso (200 OK):**
-    ```
-    Task deleted successfully.
-    ```
--   **Resposta de Erro (404 Not Found):**
-    ```
-    Task not found.
-    ```
+### 4. Update Task
+- **URL:** `/api/v1/tarefas/{id}`
+- **Method:** `PUT`
+- **Body:**
+  ```json
+  {
+    "title": "Updated Title",
+    "description": "Updated Description"
+  }
+  ```
+- **Response:** `200 OK` or `404 Not Found` or `400 Bad Request`
+
+### 5. Delete Task
+- **URL:** `/api/v1/tarefas/{id}`
+- **Method:** `DELETE`
+- **Response:** `200 OK` or `404 Not Found`
+
+## Error Handling
+
+The API returns standard error responses:
+
+```json
+{
+  "timestamp": "2023-10-27T10:00:00",
+  "status": 400,
+  "error": "Validation Error",
+  "message": "{title=Title is mandatory}",
+  "path": "/api/v1/tarefas"
+}
+```
