@@ -12,4 +12,10 @@ public interface TaskService {
 
     Optional<TaskModel> findById(UUID id);
 
+    void delete(TaskModel taskModel);
+
+    TaskModel save(TaskModel taskModel);
+
+    TaskModel update(TaskModel taskModel);
+
 }

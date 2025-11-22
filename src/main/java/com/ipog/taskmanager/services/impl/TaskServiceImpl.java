@@ -27,4 +27,19 @@ public class TaskServiceImpl implements TaskService {
     public Optional<TaskModel> findById(UUID taskId) {
         return taskRepository.findById(taskId);
     }
+
+    @Override
+    public void delete(TaskModel taskModel) {
+        taskRepository.delete(taskModel);
+    }
+
+    @Override
+    public TaskModel save(TaskModel taskModel) {
+        return taskRepository.save(taskModel);
+    }
+
+    @Override
+    public TaskModel update(TaskModel taskModel) {
+        return taskRepository.save(taskModel);
+    }
 }
